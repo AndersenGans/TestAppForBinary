@@ -5,7 +5,7 @@ using TestAppForBinary.Interfaces;
 
 namespace TestAppForBinary.Controllers
 {
-    [Produces("application/json")]
+    
     [Route("api/Manufacturers")]
     public class ManufacturersController : Controller
     {
@@ -61,33 +61,6 @@ namespace TestAppForBinary.Controllers
             logger.LogInformation("Get manufacturer by id ", result);
 
             return Json(result);
-        }
-
-        // DELETE: api/Manufacturers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteManufacturer([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                logger.LogInformation("Bad request from user");
-
-                return BadRequest(ModelState);
-            }
-
-            var manufacturer = await weatherService.GetManufacturer(id);
-
-            if (manufacturer == null)
-            {
-                logger.LogInformation("Table 'Manufacturer' does'n contain row with id '" + id + "'");
-
-                return NotFound();
-            }
-
-            await weatherService.DeleteManufacturer(manufacturer);
-
-            logger.LogInformation("Successfully deleted row with id '" + id + "'");
-
-            return Ok(manufacturer);
         }
     }
 }

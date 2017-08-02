@@ -48,6 +48,12 @@ namespace TestAppForBinary
             
             loggerFactory.AddDebug();
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+
             app.UseMvc();
 
             DBInitializer.Initialize(context);

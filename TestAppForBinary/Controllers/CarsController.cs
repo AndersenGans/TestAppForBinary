@@ -5,7 +5,7 @@ using TestAppForBinary.Services;
 
 namespace TestAppForBinary.Controllers
 {
-    [Produces("application/json")]
+    
     [Route("api/Cars")]
     public class CarsController : Controller
     {
@@ -61,33 +61,6 @@ namespace TestAppForBinary.Controllers
             logger.LogInformation("Get car by id ", result);
 
             return Json(result);
-        }
-                
-        // DELETE: api/Cars/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCar([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                logger.LogInformation("Bad request from user");
-
-                return BadRequest(ModelState);
-            }
-
-            var car = await weatherServiceWithoutI.GetCar(id);
-
-            if (car == null)
-            {
-                logger.LogInformation("Table 'Car' does'n contain row with id '" + id + "'");
-
-                return NotFound();
-            }
-
-            await weatherServiceWithoutI.DeleteCar(car);
-
-            logger.LogInformation("Successfully deleted row with id '"+ id +"'");
-
-            return Ok(car);
         }
     }
 }
